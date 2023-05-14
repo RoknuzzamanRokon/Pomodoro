@@ -13,12 +13,22 @@ LONG_BREAK_MIN = 20
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
+# ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
+
+
+def countdown_fun(value):
+    print(value)
+    if value > 0:
+        window.after(1000, countdown_fun, value - 1)
+
 
 # ---------------------------- UI SETUP ------------------------------- #
+
 window = Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
+
+countdown_fun(5)
 
 # Import image here.
 canvas = Canvas(width="200", height="224", bg=YELLOW, highlightthickness=0)
