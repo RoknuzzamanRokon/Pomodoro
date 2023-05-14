@@ -16,7 +16,7 @@ LONG_BREAK_MIN = 20
 
 
 def start_timer():
-    countdown_fun(5*60)
+    countdown_fun(20)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -25,8 +25,11 @@ def start_timer():
 def countdown_fun(value):
     count_minute = math.floor(value / 60)
     count_second = math.floor(value % 60)
-    if count_second == 0:
-        count_second = "00"
+
+    if count_second < 10:
+        count_second = f"0{count_second}"
+    elif count_minute < 10:
+        count_minute = f"0{count_minute}"
 
     canvas.itemconfig(timer_text, text=f"{count_minute}:{count_second}")
     if value > 0:
