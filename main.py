@@ -30,6 +30,7 @@ window.config(padx=100, pady=50, bg=YELLOW)
 
 countdown_fun(5)
 
+
 # Import image here.
 canvas = Canvas(width="200", height="224", bg=YELLOW, highlightthickness=0)
 image_canvas = PhotoImage(file="tomato.png")
