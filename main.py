@@ -17,7 +17,7 @@ LONG_BREAK_MIN = 20
 
 
 def countdown_fun(value):
-    print(value)
+    canvas.itemconfig(timer_text, text=value)
     if value > 0:
         window.after(1000, countdown_fun, value - 1)
 
@@ -28,15 +28,15 @@ window = Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
 
-countdown_fun(5)
-
 
 # Import image here.
 canvas = Canvas(width="200", height="224", bg=YELLOW, highlightthickness=0)
 image_canvas = PhotoImage(file="tomato.png")
 canvas.create_image(100, 112, image=image_canvas)
-canvas.create_text(100, 130, text="00:00", fill="white", font=(FONT_NAME, 30, 'bold'))
+timer_text = canvas.create_text(100, 130, text="00:00", fill="white", font=(FONT_NAME, 30, 'bold'))
 canvas.grid(row=2, column=2)
+
+countdown_fun(5)
 
 # Create Label.
 top_label = Label(text="Timer", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 50, 'bold'))
