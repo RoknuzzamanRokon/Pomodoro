@@ -9,18 +9,32 @@ FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
-
+reps = 0
 # ---------------------------- TIMER RESET ------------------------------- # 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
 
 def start_timer():
-    countdown_fun(20)
+    global reps
+
+    reps += 1
+
+    work_sec = WORK_MIN * 60
+    short_break_sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
+
+    if reps % 8 == 0:
+        countdown_fun(long_break_sec)
+    elif reps % 2 == 0:
+        countdown_fun(short_break_sec)
+    else:
+        countdown_fun(work_sec)
+
+
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
-
 
 def countdown_fun(value):
     count_minute = math.floor(value / 60)
@@ -35,8 +49,8 @@ def countdown_fun(value):
     if value > 0:
         window.after(1000, countdown_fun, value - 1)
 
-
 # ---------------------------- UI SETUP ------------------------------- #
+
 
 window = Tk()
 window.title("Pomodoro")
