@@ -5,6 +5,8 @@ PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#3bdeaa"
 YELLOW = "#f7f5bd"
+PERPLE = "#FC4F00"
+
 FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
@@ -26,10 +28,15 @@ def start_timer():
 
     if reps % 8 == 0:
         countdown_fun(long_break_sec)
+        top_label.config(text='Long Break', fg=PINK)
     elif reps % 2 == 0:
         countdown_fun(short_break_sec)
+        top_label.config(text='Short \nBreak', fg=RED)
+
     else:
         countdown_fun(work_sec)
+        top_label.config(text='Work', fg=PERPLE)
+
 
 
 
@@ -48,6 +55,8 @@ def countdown_fun(value):
     canvas.itemconfig(timer_text, text=f"{count_minute}:{count_second}")
     if value > 0:
         window.after(1000, countdown_fun, value - 1)
+    else:
+        start_timer()
 
 # ---------------------------- UI SETUP ------------------------------- #
 
