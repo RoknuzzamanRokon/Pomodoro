@@ -1,19 +1,24 @@
 from tkinter import *
 import math
+
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#3bdeaa"
 YELLOW = "#f7f5bd"
-PERPLE = "#FC4F00"
+PURPLE = "#FC4F00"
 
 FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
-# ---------------------------- TIMER RESET ------------------------------- # 
+timer = None
+# ---------------------------- TIMER RESET ------------------------------- #
 
+
+def rester_timer():
+    window.after_cancel(timer)
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
 
@@ -22,28 +27,27 @@ def start_timer():
 
     reps += 1
 
+    # countdown(5)
+
     work_sec = WORK_MIN * 60
     short_break_sec = SHORT_BREAK_MIN * 60
     long_break_sec = LONG_BREAK_MIN * 60
 
     if reps % 8 == 0:
-        countdown_fun(long_break_sec)
+        countdown(long_break_sec)
         top_label.config(text='Break', fg=PINK)
     elif reps % 2 == 0:
-        countdown_fun(short_break_sec)
+        countdown(short_break_sec)
         top_label.config(text='Break', fg=RED)
 
     else:
-        countdown_fun(work_sec)
-        top_label.config(text='Work', fg=PERPLE)
-
-
-
+        countdown(work_sec)
+        top_label.config(text='Work', fg=PURPLE)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 
-def countdown_fun(value):
+def countdown(value):
     count_minute = math.floor(value / 60)
     count_second = math.floor(value % 60)
 
@@ -54,9 +58,14 @@ def countdown_fun(value):
 
     canvas.itemconfig(timer_text, text=f"{count_minute}:{count_second}")
     if value > 0:
-        window.after(1000, countdown_fun, value - 1)
+        global timer
+        timer = window.after(1000, countdown, value - 1)
     else:
         start_timer()
+        marks = ""
+        for _ in range(math.floor(reps/2)):
+            marks += "🗸"
+        checkmark_label.config(text=marks)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -78,14 +87,14 @@ canvas.grid(row=2, column=2)
 top_label = Label(text="Timer", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 50, 'bold'))
 top_label.grid(row=1, column=2)
 
-checkmark_label = Label(text="🗸", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20, 'bold'))
+checkmark_label = Label(fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20, 'bold'))
 checkmark_label.grid(row=4, column=2)
 
 # Create Button.
 start_button = Button(text="Start", bg=GREEN, highlightthickness=0, width=5, command=start_timer)
 start_button.grid(row=3, column=1)
 
-reset_button = Button(text="Reset", bg=GREEN, highlightthickness=0, width=5)
+reset_button = Button(text="Reset", bg=GREEN, highlightthickness=0, width=5, command=rester_timer)
 reset_button.grid(row=3, column=3)
 
 
