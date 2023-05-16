@@ -19,6 +19,13 @@ timer = None
 
 def rester_timer():
     window.after_cancel(timer)
+    canvas.itemconfig(timer_text, text="00:00")
+    top_label.config(text="Timer")
+    checkmark_label.config(text="")
+    global reps
+    reps = 0
+
+
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
 
