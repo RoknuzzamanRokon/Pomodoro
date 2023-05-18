@@ -46,10 +46,14 @@ def start_timer():
     long_break_sec = LONG_BREAK_MIN * 60
 
     if reps % 8 == 0:
+        take_20_minutes_rest()
+
         countdown(long_break_sec)
         top_label.config(text='Break', fg=PINK)
     elif reps % 2 == 0:
+
         take_5_minutes_rest()
+
         countdown(short_break_sec)
         top_label.config(text='Break', fg=RED)
 
