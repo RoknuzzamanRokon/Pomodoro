@@ -1,6 +1,7 @@
 from tkinter import *
 import math
 from sound import *
+from speak_text import *
 
 
 # ---------------------------- CONSTANTS ------------------------------- #
@@ -48,6 +49,7 @@ def start_timer():
         countdown(long_break_sec)
         top_label.config(text='Break', fg=PINK)
     elif reps % 2 == 0:
+        take_5_minutes_rest()
         countdown(short_break_sec)
         top_label.config(text='Break', fg=RED)
 
