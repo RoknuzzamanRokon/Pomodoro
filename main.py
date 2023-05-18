@@ -1,5 +1,7 @@
 from tkinter import *
 import math
+from sound import *
+
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -22,6 +24,7 @@ def rester_timer():
     canvas.itemconfig(timer_text, text="00:00")
     top_label.config(text="Timer")
     checkmark_label.config(text="")
+
     global reps
     reps = 0
 
@@ -30,6 +33,7 @@ def rester_timer():
 
 
 def start_timer():
+
     global reps
 
     reps += 1
@@ -72,6 +76,7 @@ def countdown(value):
         marks = ""
         for _ in range(math.floor(reps/2)):
             marks += "🗸"
+        my_sound()
         checkmark_label.config(text=marks)
 
 # ---------------------------- UI SETUP ------------------------------- #
